@@ -24,4 +24,11 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_response 201
   end
+
+  test 'update success should change user information' do
+    put api_v1_user_path(@user),
+        params: { user: { email: 'user1@mail.com', password: '123456' } },
+        as: :json
+    assert_response 202
+  end
 end
