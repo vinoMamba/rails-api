@@ -5,4 +5,20 @@ class UserTest < ActiveSupport::TestCase
     user = User.new({ email: 'test@test.com', password_digest: '123456', role: 1 })
     assert user.valid?
   end
+
+  test 'valid user with illegal email ' do
+    user = User.new({ email: 'test', password_digest: '123456', role: 1 })
+    assert_not user.valid?
+  end
+
+  test 'valid user with illegal password' do
+    user = User.new({ email: 'test@test.com', password_digest: '', role: 1 })
+    assert_not user.valid?
+  end
+
+  test 'valid user with illegal role' do
+    user = User.new({ email: 'test@test.com', password_digest: '123', role: 5 })
+    assert_not user.valid?
+  end
+
 end
