@@ -21,4 +21,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
   end
 
+  test 'valid user with legal password' do
+    user = User.new({ email: 'test@test.com', password: '123', role: 1 })
+    assert user.valid?
+  end
 end
