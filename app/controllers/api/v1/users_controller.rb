@@ -1,11 +1,16 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_page, only: [:index]
   before_action :set_per_page, only: [:index]
+  before_action :set_user, only: [:show]
 
   def index
     @users = User.offset(@page).limit(@per_page)
     render json: { error_code: 0, data: @users, message: 'ok' }, status: 200
 
+  end
+
+  def show
+    render json: { error_code: 0, data: @user, message: 'ok' }, status: 200
   end
 
   private
@@ -21,5 +26,10 @@ class Api::V1::UsersController < ApplicationController
 
   def set_per_page
     @per_page = _to_i(params[:per_page], 10)
+  end
+
+  def set_user
+    @user = User.find_by_id params[:id].to_i
+    @user = @user || {}
   end
 end
