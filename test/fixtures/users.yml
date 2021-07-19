@@ -2,10 +2,12 @@
 
 one:
   email: user1@mail.com
-  password_digest: '123'
+  #  password_digest: '123'
+  password_digest: <%= BCrypt::Password.create('123') %>
   role: 1
 
 two:
   email: user2@mail.com
-  password_digest: '123'
+  #  password_digest: '123'
+  password_digest: <%= BCrypt::Password.create('123') %>
   role: 1
